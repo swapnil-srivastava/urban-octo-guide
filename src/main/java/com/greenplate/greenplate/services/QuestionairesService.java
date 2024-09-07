@@ -1,24 +1,19 @@
 package com.greenplate.greenplate.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.greenplate.greenplate.model.Questionaires;
-import com.greenplate.greenplate.repository.QuestionairesRepository;
+import com.greenplate.greenplate.model.Questions;
+import com.greenplate.greenplate.repository.QuestionsRepository;
 
 public class QuestionairesService {
 
     @Autowired
-    QuestionairesRepository questionairesRepository;
+    QuestionsRepository questionsRepository;
 
-    public List<Questionaires> findAllQuestions() {
-        return questionairesRepository.findAll();
-    }
-
-    public Optional<Questionaires> findById(Long id) {
-        return questionairesRepository.findById(id);
+    public List<Questions> findAllQuestions() {
+        return questionsRepository.findAll();
     }
 
 }
