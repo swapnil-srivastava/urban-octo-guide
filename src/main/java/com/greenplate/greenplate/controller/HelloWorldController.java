@@ -1,8 +1,6 @@
 package com.greenplate.greenplate.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,15 +22,6 @@ public class HelloWorldController {
     @GetMapping("/hello-spring")
     public String HelloWorldSprings() {
         return "Hello World Spring";
-    }
-
-    @SuppressWarnings("unchecked")
-    @GetMapping("/version")
-    public Map getAppVersion() {
-        @SuppressWarnings("rawtypes")
-        Map map = new HashMap();
-        map.put("app-version", appVersion);
-        return map;
     }
 
     @GetMapping("/hello-world")
