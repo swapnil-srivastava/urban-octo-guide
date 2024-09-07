@@ -13,8 +13,6 @@ public interface HelloWorldRepository extends JpaRepository<HelloWorldModel, Lon
     List<HelloWorldModel> findByEmail(String email);
     List<HelloWorldModel> findByNameContaining(String name);
     List<HelloWorldModel> findByEmailContaining(String email);
-    List<HelloWorldModel> findByNameContainingorEmailContaining(String name, String email);
-    
-
+    List<HelloWorldModel> findByNameContainingOrEmailContaining(String name, String email);
     
 }
