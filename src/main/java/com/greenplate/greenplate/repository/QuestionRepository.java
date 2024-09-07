@@ -4,11 +4,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.greenplate.greenplate.model.Questions;
+import com.greenplate.greenplate.model.Question;
 
 @Repository
-public interface QuestionsRepository extends JpaRepository<Questions, Long> {
+public interface QuestionRepository extends JpaRepository<Question, Long> {
     
-    List<Questions> findByQuestionText(String questionText);
+    List<Question> findByQuestionTextContining(String questionText);
 
 }
