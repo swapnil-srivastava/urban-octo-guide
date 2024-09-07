@@ -9,8 +9,11 @@ import com.greenplate.greenplate.model.HelloWorldModel;
 @Repository
 public interface HelloWorldRepository extends JpaRepository<HelloWorldModel, Long> {
 
-    public List<HelloWorldModel> findByName(String name);
-    public List<HelloWorldModel> findByEmail(String email);
+    List<HelloWorldModel> findByName(String name);
+    List<HelloWorldModel> findByEmail(String email);
+    List<HelloWorldModel> findByNameContaining(String name);
+    List<HelloWorldModel> findByEmailContaining(String email);
+    List<HelloWorldModel> findByNameContainingorEmailContaining(String name, String email);
     
 
     
