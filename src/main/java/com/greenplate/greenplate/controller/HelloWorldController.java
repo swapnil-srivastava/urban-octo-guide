@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +13,7 @@ import com.greenplate.greenplate.model.HelloWorldModel;
 import com.greenplate.greenplate.services.HelloWorldService;
 
 @RestController
+@CrossOrigin(origins = "https://curly-succotash-web.vercel.app/")
 public class HelloWorldController {
 
     @Autowired
