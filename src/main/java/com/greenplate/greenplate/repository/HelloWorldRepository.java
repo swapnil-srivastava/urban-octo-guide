@@ -1,5 +1,12 @@
 package com.greenplate.greenplate.repository;
 
-public class HelloWorldRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.greenplate.greenplate.model.HelloWorldModel;
+
+@Repository
+public interface HelloWorldRepository extends JpaRepository<HelloWorldModel, Long> {
+
     
 }
