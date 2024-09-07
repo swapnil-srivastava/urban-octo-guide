@@ -22,4 +22,8 @@ public class HelloWorldService {
         return helloWorldRepository.save(helloWorldModel);
     }
 
+    public List<HelloWorldModel> saveAllService(List<HelloWorldModel> helloWorldList) {
+       return helloWorldRepository.saveAll(helloWorldList);
+    }
+
 }
