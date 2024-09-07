@@ -8,7 +8,5 @@ import com.greenplate.greenplate.model.Question;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    
-    List<Question> findByQuestionTextContining(String questionText);
 
 }
