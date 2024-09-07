@@ -7,14 +7,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Component
 @Entity
 @Table(name="hello-world")
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class HelloWorldModel {
 
     @Id
@@ -23,5 +23,10 @@ public class HelloWorldModel {
 
     String name;
     String email;
+
+    public HelloWorldModel(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
 }

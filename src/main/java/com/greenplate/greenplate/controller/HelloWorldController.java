@@ -35,23 +35,13 @@ public class HelloWorldController {
         return helloWorldService.findAllHelloWorld();
     }
 
-    @GetMapping("/load-hello-world")
-    public HelloWorldModel HelloWorldLoad() {
-        HelloWorldModel helloWorldModel = new HelloWorldModel(null, "Hello Swapnil Srivastava", "hello@swapnil.de");
-
-        helloWorldModel.setName("Hello Swapnil Srivastava");
-        helloWorldModel.setEmail("hello@swapnil.de");
-
-        return helloWorldService.saveHelloWorld(helloWorldModel);
-    }
-
     @GetMapping("/load-list")
     public List<HelloWorldModel> getMethodName() {
         List<HelloWorldModel> helloWorldList = new ArrayList<HelloWorldModel>(List.of(
-            new HelloWorldModel((long) 1, "Hello Swapnil Srivastava", "hello@swapnil.com"),
-            new HelloWorldModel((long) 2, "Hello Valentin Braukmann", "hello@valentin.com"),
-            new HelloWorldModel((long) 3, "Hello Florian Alexander Nathan Loher", "hello@florian.com"),
-            new HelloWorldModel((long) 4, "Hello Juliana Cerqueira", "hello@juliana.com")
+            new HelloWorldModel("Hello Swapnil Srivastava", "hello@swapnil.com"),
+            new HelloWorldModel("Hello Valentin Braukmann", "hello@valentin.com"),
+            new HelloWorldModel("Hello Florian Alexander Nathan Loher", "hello@florian.com"),
+            new HelloWorldModel("Hello Juliana Cerqueira", "hello@juliana.com")
         ));
 
         return helloWorldService.saveAllService(helloWorldList);
