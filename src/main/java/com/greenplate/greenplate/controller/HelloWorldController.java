@@ -49,7 +49,7 @@ public class HelloWorldController {
     public HelloWorldModel HelloWorldLoad() {
         HelloWorldModel helloWorldModel = new HelloWorldModel();
 
-        helloWorldModel.setName("Hello Swapnil");
+        helloWorldModel.setName("Hello Swapnil Srivastava");
         helloWorldModel.setEmail("hello@swapnil.de");
 
         return helloWorldService.saveHelloWorld(helloWorldModel);
