@@ -1,30 +1,28 @@
 package com.greenplate.greenplate.model;
 
-import org.springframework.stereotype.Component;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Component
 @Entity
 @Data
 @NoArgsConstructor
-public class HelloWorldModel {
-
+@AllArgsConstructor
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-
-    String name;
-    String email;
-
-    public HelloWorldModel(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-
+    private Long id;
+    
+    private String questionText;
+    
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Choice> choices;
 }
