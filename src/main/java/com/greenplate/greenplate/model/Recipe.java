@@ -22,7 +22,7 @@ public class Recipe {
     
     private String recipeText;
     
-    @ManyToMany
+    @ManyToMany(mappedBy = "recipes")
     private List<Ingredient> ingredients;
     
     private Double carbonFootprint;
