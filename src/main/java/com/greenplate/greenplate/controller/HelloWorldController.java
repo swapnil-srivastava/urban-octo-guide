@@ -27,7 +27,7 @@ public class HelloWorldController {
     public String HelloWorldSprings() {
         String url = "https://guess-a-number.azurewebsites.net/hack/0";
 		// String response = restTemplate.getForObject(url, String.class);
-        return "response";
+        return "response and ";
     }
 
     @GetMapping("/hello-world")
