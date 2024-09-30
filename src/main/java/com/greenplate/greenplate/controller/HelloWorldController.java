@@ -21,13 +21,15 @@ public class HelloWorldController {
     HelloWorldService helloWorldService;
     
     @Value("${app.version}")
-    private String appVersion; 
+    private String appVersion;
+    
+    private RestTemplate restTemplate; 
 
     @GetMapping("/hello-spring")
     public String HelloWorldSprings() {
         String url = "https://guess-a-number.azurewebsites.net/hack/0";
-		// String response = restTemplate.getForObject(url, String.class);
-        return "response and ";
+        String response = restTemplate.getForObject(url, String.class);
+        return "response and " + response;
     }
 
     @GetMapping("/hello-world")
