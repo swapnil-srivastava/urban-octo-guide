@@ -20,6 +20,7 @@ public class HelloWorldController {
     @Autowired
     HelloWorldService helloWorldService;
 
+    @Autowired
     RestTemplate restTemplate;
     
     @Value("${app.version}")
