@@ -19,9 +19,6 @@ public class HelloWorldController {
 
     @Autowired
     HelloWorldService helloWorldService;
-
-    @Autowired
-    RestTemplate restTemplate;
     
     @Value("${app.version}")
     private String appVersion; 
@@ -29,8 +26,8 @@ public class HelloWorldController {
     @GetMapping("/hello-spring")
     public String HelloWorldSprings() {
         String url = "https://guess-a-number.azurewebsites.net/hack/0";
-		String response = restTemplate.getForObject(url, String.class);
-        return response;
+		// String response = restTemplate.getForObject(url, String.class);
+        return "response";
     }
 
     @GetMapping("/hello-world")
