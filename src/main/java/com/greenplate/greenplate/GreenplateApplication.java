@@ -12,7 +12,6 @@ import org.springframework.boot.CommandLineRunner;
 @SpringBootApplication
 public class GreenplateApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(ConsumingRestApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(GreenplateApplication.class, args);
@@ -28,7 +27,7 @@ public class GreenplateApplication {
 		return args -> { 
 			String url = "https://guess-a-number.azurewebsites.net/hack/0";
 			String response = restTemplate.getForObject(url, String.class);
-			log.info("response ::::::>", response);
+			System.out.println("response  :::::" + response);
 		};
 	}
 
