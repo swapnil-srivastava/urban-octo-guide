@@ -23,7 +23,7 @@ public class GreenplateApplication {
 			String url = "https://guess-a-number.azurewebsites.net/hack/0";
 			String response = restTemplate.getForObject(url, String.class);
 			System.out.println("response ::::::", response);
-		}
+		};
 	}
 
 }
