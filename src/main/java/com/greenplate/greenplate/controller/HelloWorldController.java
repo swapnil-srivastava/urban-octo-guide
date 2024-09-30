@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.greenplate.greenplate.model.HelloWorldModel;
 import com.greenplate.greenplate.services.HelloWorldService;
@@ -18,13 +19,18 @@ public class HelloWorldController {
 
     @Autowired
     HelloWorldService helloWorldService;
+
+    RestTemplate restTemplate;
     
     @Value("${app.version}")
     private String appVersion; 
 
     @GetMapping("/hello-spring")
     public String HelloWorldSprings() {
-        return "Hello World Springboot";
+        String url = "https://guess-a-number.azurewebsites.net/hack/0";
+		String response = restTemplate.getForObject(url, String.class);
+		System.out.println("response  :::::" + response);
+        return response;
     }
 
     @GetMapping("/hello-world")

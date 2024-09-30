@@ -22,13 +22,4 @@ public class GreenplateApplication {
 		return builder.build();
 	}
 
-	@Bean
-	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-		return args -> { 
-			String url = "https://guess-a-number.azurewebsites.net/hack/0";
-			String response = restTemplate.getForObject(url, String.class);
-			System.out.println("response  :::::" + response);
-		};
-	}
-
 }
