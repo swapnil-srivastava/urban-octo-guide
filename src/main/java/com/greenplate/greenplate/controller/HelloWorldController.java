@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,11 @@ public class HelloWorldController {
     @GetMapping("/hello-world-list")
     public List<HelloWorldModel> HelloWorldList() {
         return helloWorldService.findAllHelloWorld();
+    }
+
+    @GetMapping(value = "/call-heroku-service", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getMessage() {
+        return "Hello from the heroku";
     }
 
     @GetMapping("/call-guess-number-service")
