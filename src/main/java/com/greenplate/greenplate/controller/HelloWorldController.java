@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,11 +20,12 @@ public class HelloWorldController {
 
     @Autowired
     HelloWorldService helloWorldService;
+
+    @Autowired
+    private RestTemplate restTemplate;
     
     @Value("${app.version}")
     private String appVersion;
-    
-    private RestTemplate restTemplate; 
 
     @GetMapping("/hello-spring")
     public String HelloWorldSprings() {
@@ -40,6 +42,26 @@ public class HelloWorldController {
     @GetMapping("/hello-world-list")
     public List<HelloWorldModel> HelloWorldList() {
         return helloWorldService.findAllHelloWorld();
+    }
+
+    @GetMapping("/call-guess-number-service")
+    public ResponseEntity<String> callGuessNumber() {
+        String microservice2Url = "https://guess-a-number.azurewebsites.net/hack/0";
+        
+        ResponseEntity<String> response = restTemplate.getForEntity(microservice2Url, String.class);
+        String message = response.getBody();
+        
+        return ResponseEntity.ok("Message from guess number service: " + message);
+    }
+
+    @GetMapping("/call-gcp-service")
+    public ResponseEntity<String> callGcpService() {
+        String microservice2Url = "https://guess-a-number.azurewebsites.net/hack/0";
+        
+        ResponseEntity<String> response = restTemplate.getForEntity(microservice2Url, String.class);
+        String message = response.getBody();
+        
+        return ResponseEntity.ok("Message from GCP Service: " + message);
     }
 
     @GetMapping("/load-list")
