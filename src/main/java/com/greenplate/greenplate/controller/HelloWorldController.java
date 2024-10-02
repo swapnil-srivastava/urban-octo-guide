@@ -46,9 +46,9 @@ public class HelloWorldController {
 
     @GetMapping("/call-guess-number-service")
     public ResponseEntity<String> callGuessNumber() {
-        String microservice2Url = "https://guess-a-number.azurewebsites.net/hack/0";
+        String guessNumber2Url = "https://guess-a-number.azurewebsites.net/hack/0";
         
-        ResponseEntity<String> response = restTemplate.getForEntity(microservice2Url, String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity(guessNumber2Url, String.class);
         String message = response.getBody();
         
         return ResponseEntity.ok("Message from guess number service: " + message);
@@ -56,9 +56,9 @@ public class HelloWorldController {
 
     @GetMapping("/call-gcp-service")
     public ResponseEntity<String> callGcpService() {
-        String microservice2Url = "https://guess-a-number.azurewebsites.net/hack/0";
+        String gcpService2Url = "https://swapnilsrivastava-eu-service-181557558593.europe-west3.run.app/message";
         
-        ResponseEntity<String> response = restTemplate.getForEntity(microservice2Url, String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity(gcpService2Url, String.class);
         String message = response.getBody();
         
         return ResponseEntity.ok("Message from GCP Service: " + message);
