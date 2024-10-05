@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -81,8 +80,6 @@ public class HelloWorldController {
             .toEntity(String.class)
             .timeout(Duration.ofSeconds(10));
     }
-
-
 
     @GetMapping("/load-list")
     public List<HelloWorldModel> getMethodName() {
