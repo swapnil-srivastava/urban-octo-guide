@@ -69,18 +69,18 @@ public class HelloWorldController {
         return ResponseEntity.ok("Message from guess number service: " + message);
     }
 
-@GetMapping("/call-gcp-service")
-public Mono<ResponseEntity<String>> callGcpService() {
-    return webClient.get()
-        .uri("/message")
-        .retrieve()
-        .onStatus(HttpStatusCode::is4xxClientError, 
-            response -> Mono.error(new RuntimeException("4xx error")))
-        .onStatus(HttpStatusCode::is5xxServerError, 
-            response -> Mono.error(new RuntimeException("5xx error")))
-        .toEntity(String.class)
-        .timeout(Duration.ofSeconds(10));
-}
+    @GetMapping("/call-gcp-service")
+    public Mono<ResponseEntity<String>> callGcpService() {
+        return webClient.get()
+            .uri("/message")
+            .retrieve()
+            .onStatus(HttpStatusCode::is4xxClientError, 
+                response -> Mono.error(new RuntimeException("4xx error")))
+            .onStatus(HttpStatusCode::is5xxServerError, 
+                response -> Mono.error(new RuntimeException("5xx error")))
+            .toEntity(String.class)
+            .timeout(Duration.ofSeconds(10));
+    }
 
 
 
