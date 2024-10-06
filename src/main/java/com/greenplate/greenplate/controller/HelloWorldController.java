@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -22,7 +21,6 @@ import com.greenplate.greenplate.services.HelloWorldService;
 import com.greenplate.greenplate.services.KafkaProducerService;
 
 import reactor.core.publisher.Mono;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -102,7 +100,7 @@ public class HelloWorldController {
     }
     
     @GetMapping("/hello-kafka/{message}")
-    public ResponseEntity<String> sendKafkaMessage(@PathVariable("message") String message) {
+    public ResponseEntity<String> sendKafkaMessage(@PathVariable String message) {
         kafkaProducerService.sendMessage("hello_world_topic", message);
         return ResponseEntity.ok("Message sent to Kafka topic: " + message);
     }
