@@ -11,12 +11,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.greenplate.greenplate.model.HelloWorldModel;
 import com.greenplate.greenplate.services.HelloWorldService;
+import com.greenplate.greenplate.services.KafkaProducerService;
 
 import reactor.core.publisher.Mono;
 
@@ -29,6 +32,9 @@ public class HelloWorldController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
     @Autowired
     private WebClient webClient;
@@ -93,4 +99,9 @@ public class HelloWorldController {
         return helloWorldService.saveAllService(helloWorldList);
     }
     
+    @PostMapping("/hello-kafka/{kafka-message}")
+    public ResponseEntity<String> sendKafkaMessage(@PathVariable("kafka-message") String message) {
+        kafkaProducerService.sendMessage("hello_world_topic", message);
+        return ResponseEntity.ok("Message sent to Kafka topic: " + message);
+    }
 }
