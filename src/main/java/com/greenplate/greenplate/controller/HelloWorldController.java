@@ -22,6 +22,8 @@ import com.greenplate.greenplate.services.HelloWorldService;
 import com.greenplate.greenplate.services.KafkaProducerService;
 
 import reactor.core.publisher.Mono;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @CrossOrigin(origins = "https://curly-succotash-web.vercel.app/")
@@ -99,7 +101,7 @@ public class HelloWorldController {
         return helloWorldService.saveAllService(helloWorldList);
     }
     
-    @PostMapping("/hello-kafka/{kafka-message}")
+    @GetMapping("/hello-kafka/{kafka-message}")
     public ResponseEntity<String> sendKafkaMessage(@PathVariable("kafka-message") String message) {
         kafkaProducerService.sendMessage("hello_world_topic", message);
         return ResponseEntity.ok("Message sent to Kafka topic: " + message);
