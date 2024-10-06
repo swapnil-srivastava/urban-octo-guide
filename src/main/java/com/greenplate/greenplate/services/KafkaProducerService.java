@@ -10,9 +10,9 @@ public class KafkaProducerService {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void sendMessage(String topic, String key, String message) {
-        System.out.println("KafkaProducerService :::: key" + key + " " + "message " + message);
-        kafkaTemplate.send(topic, key, message);
+    public void sendMessage(String topic, String message) {
+        System.out.println("KafkaProducerService :::: "+ " " + "message " + message);
+        kafkaTemplate.send(topic, message);
     }
     
 }
