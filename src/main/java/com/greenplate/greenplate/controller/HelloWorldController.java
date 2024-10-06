@@ -101,8 +101,8 @@ public class HelloWorldController {
         return helloWorldService.saveAllService(helloWorldList);
     }
     
-    @GetMapping("/hello-kafka/{kafka-message}")
-    public ResponseEntity<String> sendKafkaMessage(@PathVariable("kafka-message") String message) {
+    @GetMapping("/hello-kafka/{message}")
+    public ResponseEntity<String> sendKafkaMessage(@PathVariable String message) {
         kafkaProducerService.sendMessage("hello_world_topic", message);
         return ResponseEntity.ok("Message sent to Kafka topic: " + message);
     }
