@@ -1,6 +1,7 @@
 package com.greenplate.greenplate.controller;
 
 import java.util.List;
+import java.util.UUID;
 import java.time.Duration;
 import java.util.ArrayList;
 
@@ -12,10 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.github.javafaker.Faker;
 import com.greenplate.greenplate.model.HelloWorldModel;
 import com.greenplate.greenplate.services.HelloWorldService;
 import com.greenplate.greenplate.services.KafkaProducerService;
@@ -38,6 +42,9 @@ public class HelloWorldController {
 
     @Autowired
     private WebClient webClient;
+
+    @Autowired
+    private Faker faker;
     
     @Value("${app.version}")
     private String appVersion;
@@ -103,5 +110,28 @@ public class HelloWorldController {
     public ResponseEntity<String> sendKafkaMessage(@PathVariable("key") String key, @PathVariable("message") String message) {
         kafkaProducerService.sendMessage("hello_world_topic", key ,message);
         return ResponseEntity.ok("Message sent to Kafka topic: " + message);
+    }
+
+    @PostMapping("/generate")
+    public String generateShakespeareQuote() {
+        String id = UUID.randomUUID().toString();
+        String quote = faker.shakespeare().hamletQuote();
+        kafkaProducerService.sendMessage("shakespeare-topic", id, quote);
+        return "Shakespeare message sent to Kafka";
+    }
+
+    @PostMapping("/generate-batch")
+    public String generateShakespeareQuoteBatch(@RequestParam(defaultValue = "10") int batchSize) {
+        List<String> sentMessages = new ArrayList<>();
+
+        for (int i = 0; i < batchSize; i++) {
+            String id = UUID.randomUUID().toString();
+            String quote = faker.shakespeare().hamletQuote();
+            kafkaProducerService.sendMessage("shakespeare-topic", id, quote);
+            sentMessages.add("ID: " + id + ", Quote: " + quote);
+        }
+
+        return String.format("Batch of %d Shakespeare messages sent to Kafka. Messages:\n%s", 
+                             batchSize, String.join("\n", sentMessages));
     }
 }
