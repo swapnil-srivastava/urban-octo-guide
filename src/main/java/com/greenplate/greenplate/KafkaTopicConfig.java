@@ -19,14 +19,14 @@ public class KafkaTopicConfig {
     private String bootstrapAddress;
   
     @Value("${spring.kafka.properties.sasl.mechanism}") 
-      private String saslMechanism;
+    private String saslMechanism;
     
     
     @Value("${spring.kafka.properties.sasl.jaas.config}") 
-      private String salsJaasConfig;
+    private String salsJaasConfig;
   
     @Value("${spring.kafka.properties.security.protocol}") 
-      private String securityProtocol;
+    private String securityProtocol;
 
     @Value("${spring.kafka.properties.sasl.jaas.config}") 
     private String saslJaasConfig;
