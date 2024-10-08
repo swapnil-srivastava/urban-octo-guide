@@ -70,7 +70,7 @@ public class HelloWorldController {
 
     @GetMapping(value = "/call-heroku-service", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getMessage() {
-        return "Hello from the heroku";
+        return "Hello from the heroku service";
     }
 
     @GetMapping("/call-guess-number-service")
