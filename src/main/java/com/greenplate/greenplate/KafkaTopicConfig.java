@@ -48,5 +48,23 @@ public class KafkaTopicConfig {
           .compact()
           .build();
     }
+
+    @Bean
+    public NewTopic characterQuoteCounts() {
+      return TopicBuilder.name("character-quote-counts")
+          .partitions(6)
+          .replicas(3)
+          .compact()
+          .build();
+    }
+
+    @Bean
+    public NewTopic wordFrequency() {
+      return TopicBuilder.name("word-frequency")
+          .partitions(6)
+          .replicas(3)
+          .compact()
+          .build();
+    }
   
 }
