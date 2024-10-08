@@ -6,6 +6,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.github.javafaker.Faker;
+
 
 @Configuration
 public class WebConfig {
@@ -22,5 +24,10 @@ public class WebConfig {
                         .allowCredentials(true); // Optional if you need credentials
             }
         };
+    }
+
+    @Bean
+    public Faker faker() {
+        return new Faker();
     }
 }
