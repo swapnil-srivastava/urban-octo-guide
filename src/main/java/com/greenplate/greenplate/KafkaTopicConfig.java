@@ -21,7 +21,6 @@ public class KafkaTopicConfig {
     @Value("${spring.kafka.properties.sasl.mechanism}") 
     private String saslMechanism;
     
-    
     @Value("${spring.kafka.properties.sasl.jaas.config}") 
     private String salsJaasConfig;
   
