@@ -19,21 +19,19 @@ import java.util.Arrays;
 @Component
 public class KafkaProcessor {
 
-    private static final Logger logger = LoggerFactory.getLogger(KafkaProcessor.class);
+    // private static final Logger logger = LoggerFactory.getLogger(KafkaProcessor.class);
     
-    @Autowired
-    public void process(StreamsBuilder builder) {
-        final Serde<String> stringSerde = Serdes.String();
-        final Serde<Long> longSerde = Serdes.Long();
+    // @Autowired
+    // public void processBackToTheFuture(StreamsBuilder builder) {
+    //     final Serde<String> stringSerde = Serdes.String();
+    //     final Serde<Long> longSerde = Serdes.Long();
 
-        KStream<String, String> textLines = builder.stream("shakespeare-topic", Consumed.with(stringSerde, stringSerde));
+    //     KStream<String, String> textLines = builder.stream("back-to-the-future-topic", Consumed.with(stringSerde, stringSerde));
 
-        KTable<String, Long> wordCounts = textLines
-            .peek((key, value) -> logger.info("Received message - Key: {}, Value: {}", key, value))
-            .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
-            .groupBy((key, word) -> word)
-            .count();
+    //     KTable<String, Long> wordCounts = textLines
+    //         .peek((key, value) -> logger.info("Received message - Key: {}, Value: {}", key, value))
+    //         .count();
 
-        wordCounts.toStream().to("streams-wordcount-output", Produced.with(stringSerde, longSerde));
-    }
+    //     wordCounts.toStream().to("streams-wordcount-output", Produced.with(stringSerde, longSerde));
+    // }
 }
