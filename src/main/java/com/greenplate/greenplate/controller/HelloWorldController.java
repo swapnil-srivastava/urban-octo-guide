@@ -114,7 +114,7 @@ public class HelloWorldController {
         return ResponseEntity.ok("Message sent to Kafka topic: " + message);
     }
 
-    @PostMapping("/generate")
+    @PostMapping("/generate/shakespeare")
     public String generateShakespeareQuote() {
         String id = UUID.randomUUID().toString();
         String quote = faker.shakespeare().hamletQuote();
@@ -122,7 +122,7 @@ public class HelloWorldController {
         return "Shakespeare message sent to Kafka";
     }
 
-    @PostMapping("/generate-batch")
+    @PostMapping("/generate-batch/shakespeare")
     public String generateShakespeareQuoteBatch(@RequestParam(defaultValue = "10") int batchSize) {
         List<String> sentMessages = new ArrayList<>();
 
@@ -134,6 +134,29 @@ public class HelloWorldController {
         }
 
         return String.format("Batch of %d Shakespeare messages sent to Kafka. Messages:\n%s", 
+                             batchSize, String.join("\n", sentMessages));
+    }
+
+    @PostMapping("/generate/backToTheFuture")
+    public String generateBackToTheFutureQuote() {
+        String quote = faker.backToTheFuture().quote();
+        String character = faker.backToTheFuture().character();
+        kafkaProducerService.sendMessage("back-to-the-future-topic", character, quote);
+        return "back-to-the-future-topic message sent to Kafka";
+    }
+
+    @PostMapping("/generate-batch/backToTheFuture")
+    public String generateBackToTheFutureQuoteBatch(@RequestParam(defaultValue = "10") int batchSize) {
+        List<String> sentMessages = new ArrayList<>();
+
+        for (int i = 0; i < batchSize; i++) {
+            String quote = faker.backToTheFuture().quote();
+            String character = faker.backToTheFuture().character();
+            kafkaProducerService.sendMessage("back-to-the-future-topic", character, quote);
+            sentMessages.add("Character: " + character + ", Quote: " + quote);
+        }
+
+        return String.format("Batch of %d back-to-the-future-topic messages sent to Kafka. Messages:\n%s", 
                              batchSize, String.join("\n", sentMessages));
     }
 }
