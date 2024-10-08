@@ -7,11 +7,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 @SpringBootApplication
 @EnableKafka
 public class GreenplateApplication {
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(GreenplateApplication.class, args);
 	}
-
 
 }
