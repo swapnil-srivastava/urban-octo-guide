@@ -24,11 +24,13 @@ import com.greenplate.greenplate.model.HelloWorldModel;
 import com.greenplate.greenplate.services.HelloWorldService;
 import com.greenplate.greenplate.services.KafkaProducerService;
 
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 
 @RestController
 @CrossOrigin(origins = "https://curly-succotash-web.vercel.app/")
+@RequiredArgsConstructor
 public class HelloWorldController {
 
     @Autowired
@@ -44,7 +46,7 @@ public class HelloWorldController {
     private WebClient webClient;
 
     @Autowired
-    private Faker faker;
+    private final Faker faker;
     
     @Value("${app.version}")
     private String appVersion;
