@@ -16,19 +16,19 @@ public class KafkaTopicConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootStrapServer;
-    
-    @Bean
-    public KafkaAdmin kafkaAdmin() {
-        Map<String, Object> configs = new HashMap<>();
-        configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer);
-        return new KafkaAdmin(configs);
+
+    @Bean 
+    public KafkaAdmin admin() {
+      return new KafkaAdmin(Map.of(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer));
     }
 
     @Bean
-    public NewTopic superManTopic() {
-        return TopicBuilder.name("superman-topic")
-                        .partitions(6)
-                        .replicas(3)
-                        .build();
+    public NewTopic supermanTopic() {
+      return TopicBuilder.name("superman-topic")
+          .partitions(6)
+          .replicas(3)
+          .compact()
+          .build();
     }
+  
 }
