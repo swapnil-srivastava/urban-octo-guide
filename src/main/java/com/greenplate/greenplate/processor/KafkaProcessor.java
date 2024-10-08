@@ -19,19 +19,35 @@ import java.util.Arrays;
 @Component
 public class KafkaProcessor {
 
-    // private static final Logger logger = LoggerFactory.getLogger(KafkaProcessor.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaProcessor.class);
     
-    // @Autowired
-    // public void processBackToTheFuture(StreamsBuilder builder) {
-    //     final Serde<String> stringSerde = Serdes.String();
-    //     final Serde<Long> longSerde = Serdes.Long();
-
-    //     KStream<String, String> textLines = builder.stream("back-to-the-future-topic", Consumed.with(stringSerde, stringSerde));
-
-    //     KTable<String, Long> wordCounts = textLines
-    //         .peek((key, value) -> logger.info("Received message - Key: {}, Value: {}", key, value))
-    //         .count();
-
-    //     wordCounts.toStream().to("streams-wordcount-output", Produced.with(stringSerde, longSerde));
-    // }
+    @Autowired
+    public void processBackToTheFuture(StreamsBuilder builder) {
+        final Serde<String> stringSerde = Serdes.String();
+        final Serde<Long> longSerde = Serdes.Long();
+    
+        KStream<String, String> quotes = builder.stream("back-to-the-future-topic", 
+            Consumed.with(stringSerde, stringSerde));
+    
+        // Assuming the input is in the format "Character: Quote"
+        KTable<String, Long> characterQuoteCounts = quotes
+            .peek((key, value) -> logger.info("Received quote - Key: {}, Value: {}", key, value))
+            .mapValues(value -> value.split(":", 2)[0].trim()) // Extract character name
+            .groupBy((key, character) -> character)
+            .count();
+    
+        // Output the count of quotes per character
+        characterQuoteCounts.toStream()
+            .to("character-quote-counts", Produced.with(stringSerde, longSerde));
+    
+        // Word frequency analysis
+        KTable<String, Long> wordFrequency = quotes
+            .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
+            .groupBy((key, word) -> word)
+            .count();
+    
+        // Output word frequency
+        wordFrequency.toStream()
+            .to("word-frequency", Produced.with(stringSerde, longSerde));
+    }
 }
